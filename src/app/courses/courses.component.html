@@ -1,0 +1,31 @@
+<head>
+<style>
+    div{
+        font-size: 20px;
+    }
+</style>
+</head>
+
+<body>
+    <div>
+        <app-search (searchTextChanged)="onSearchTextEntered($event)"></app-search>
+        <app-filter [total]="getTotalcourse()"
+                    [free]="getFreecourse()"
+                    [premium]="getPremiumcourse()"
+                    (filterRadioButttonSelectionChanged)="onFilterRadioButtonChanged($event)"   > 
+        </app-filter>
+    </div>
+    <ng-container *ngFor = "let course of courses" >
+        <ng-container *ngIf="courseCountRadioButton === 'All' ||  courseCountRadioButton === course.type">
+        <!--courseCountRadioButton === 'All' ||  courseCountRadioButton === course.type-->
+        <div  *ngIf="searchText === '' || course.name.toLowerCase().includes(searchText) "> 
+            Name : {{course.name}} <br>
+            Type : {{course.type}} <br> <br>
+        </div>
+        </ng-container>
+    </ng-container>
+    
+   
+       
+</body>
+
